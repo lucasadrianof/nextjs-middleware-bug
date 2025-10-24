@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "next build && cp -R .next/static .next/standalone && node --experimental-strip-types scripts/patch-body-streams.mts",
+    "start": "node .next/standalone/server.js",
     "lint": "eslint"
   },
   "dependencies": {
