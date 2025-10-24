@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && cp -R .next/static .next/standalone && node --experimental-strip-types scripts/patch-body-streams.mts",
+    "build": "next build && cp -R .next/static .next/standalone/.next && node --experimental-strip-types scripts/patch-body-streams.mts",
     "start": "node .next/standalone/server.js",
     "lint": "eslint",
     "bugfix": "node --experimental-strip-types scripts/bugfix-next-server.mts"
