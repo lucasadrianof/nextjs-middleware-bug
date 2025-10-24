@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build && cp -R .next/static .next/standalone && node --experimental-strip-types scripts/patch-body-streams.mts",
     "start": "node .next/standalone/server.js",
-    "lint": "eslint"
+    "lint": "eslint",
+    "bugfix": "node --experimental-strip-types scripts/bugfix-next-server.mts"
   },
   "dependencies": {
     "react": "19.2.0",
