@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && cp -R .next/static .next/standalone/.next && node --experimental-strip-types scripts/patch-body-streams.mts",
+    "build": "next build && cp -R .next/static .next/standalone/.next && node scripts/patch-body-streams.mjs",
     "start": "node .next/standalone/server.js",
-    "bugfix": "node --experimental-strip-types scripts/bugfix-next-server.mts"
+    "bugfix": "node scripts/bugfix-next-server.mjs"
   },
   "dependencies": {
     "next": "16.0.1-canary.3",
