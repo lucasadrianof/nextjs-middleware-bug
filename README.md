@@ -1,6 +1,6 @@
 # Next.js Middleware Body Race Condition Bug
 
-This project demonstrates a race condition bug in Next.js (14, 15 and 16) when using middleware (proxy) that reads the request body along with server actions that expect to receive large payloads.
+This project demonstrates a race condition bug in Next.js (verified on 15 and 16) when using middleware (proxy) that reads the request body along with server actions that expect to receive large payloads.
 
 ## The Bug
 
@@ -90,30 +90,6 @@ pnpm start
    - No race condition
 
 
-## Technical Details
-
-### The Race Condition Amplifier
-
-The build script (`scripts/patch-body-streams.mts`) adds this line before `replaceRequestBody()`:
-
-```javascript
-await new Promise(resolve => setTimeout(resolve, Math.random() * 1000));
-```
-
-This random delay (0-1000ms) tries to emulate the network overhead that might happen when deploying the app in a Cloud Provider (e.g. AWS).
-
-### The Fix
-
-The bugfix script (`scripts/bugfix-next-server.mts`) changes:
-
-```javascript
-finally {
-  if (hasRequestBody) {
-    await requestData.body.finalize();
-  }
-}
-```
-
 ## Requirements
 
 - Node.js 20 or 22+ (for `--experimental-strip-types` flag)
@@ -121,8 +97,4 @@ finally {
 
 ## Notes
 
-- The bug is more reproducible in production builds (`standalone` mode).
 - The random delay in `patch-body-streams.mts` it used to easily emulate network overheads locally.
-- In real-world scenarios, the race condition can occur naturally under high load or with larger payloads.
-- The payload size can be adjusted in `src/app/page.tsx` (currently ~50KB)
-
