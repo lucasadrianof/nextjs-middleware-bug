@@ -9,7 +9,7 @@
     "bugfix": "node --experimental-strip-types scripts/bugfix-next-server.mts"
   },
   "dependencies": {
-    "next": "16.0.0",
+    "next": "16.0.1-canary.3",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
